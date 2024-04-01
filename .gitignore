@@ -1,0 +1,13 @@
+# Ignore all .txt files
+*.txt
+*.mp3
+*.mp4
+*.wav
+*.jpeg
+
+# Ignore directories
+__pycache__/
+Backup/
+venv/
+
+test.py
