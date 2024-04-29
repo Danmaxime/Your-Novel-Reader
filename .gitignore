@@ -1,4 +1,3 @@
-# Ignore all .txt files
 *.txt
 *.mp3
 *.mp4
@@ -9,5 +8,18 @@
 __pycache__/
 Backup/
 venv/
+tests/
+.idea/
 
+# Ignore content of directories but not directories themselves
+covers/*
+novel_configs/*
+!covers/
+!novel_configs/
+
+# Ignore specific files
 test.py
+upload_video.py
+YoutubeAPIWork.py
+novel_list.json
+auto_audiobook.bat
