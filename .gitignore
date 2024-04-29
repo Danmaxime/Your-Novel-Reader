@@ -17,3 +17,6 @@ upload_video.py
 YoutubeAPIWork.py
 novel_list.json
 auto_audiobook.bat
+
+# Don't ignore requirements.txt
+!requirements.txt

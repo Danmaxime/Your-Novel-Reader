@@ -1,0 +1,6 @@
+moviepy==1.0.3
+pydub==0.25.1
+Scrapy==2.11.1
+torch==2.2.2+cu121
+TTS==0.22.0
+TTS==0.22.0
