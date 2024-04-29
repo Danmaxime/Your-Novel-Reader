@@ -11,12 +11,6 @@ venv/
 tests/
 .idea/
 
-# Ignore content of directories but not directories themselves
-covers/*
-novel_configs/*
-!covers/
-!novel_configs/
-
 # Ignore specific files
 test.py
 upload_video.py
