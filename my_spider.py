@@ -9,18 +9,18 @@ import torch
 from moviepy.editor import *
 
 class MySpider(scrapy.Spider):
-    name = 'myspider'
+    name = 'my_spider'
     grab_count = 0
 
     @staticmethod
-    def getchaptergrabcount(path):
+    def get_chapter_grab_count(path):
         with open(f'{path}', 'r', encoding='utf-8') as config:
             config_obj = json.load(config)
         chapter_grab_count = int(config_obj['chapter_grab_count'])
         return chapter_grab_count
 
     @staticmethod
-    def getconfig(path):
+    def get_config(path):
         with open(f'{path}', 'r', encoding='utf-8') as config:
             config_obj = json.load(config)
         return config_obj
@@ -39,7 +39,7 @@ class MySpider(scrapy.Spider):
             book_title = config_obj['book_title']
             starting_chapter_number = config_obj['next_chapter_num']
             book_base_url = config_obj['book_base_url']
-            chapter_grab_count = self.getchaptergrabcount(valid_config)
+            chapter_grab_count = self.get_chapter_grab_count(valid_config)
             next_chapter_number = starting_chapter_number + chapter_grab_count
             for i in range(starting_chapter_number, next_chapter_number):
                 is_last_request = i == next_chapter_number - 1
@@ -60,7 +60,7 @@ class MySpider(scrapy.Spider):
             for paragraph in paragraphs:
                 f.write(paragraph + '\n\n')
 
-        needed_grab_count = int(self.getconfig(config_path)['chapter_grab_count'])
+        needed_grab_count = int(self.get_config(config_path)['chapter_grab_count'])
 
         if self.grab_count == needed_grab_count:
             self.grab_count = 0
@@ -71,7 +71,7 @@ class MySpider(scrapy.Spider):
                 config_obj['next_chapter_num'] = next_chapter_number
                 json.dump(config_obj, config, indent=4)
 
-            print("All requests for this config have been processed, running sortchapters.py")
-            sys.argv = ['./scripts/sortchapters.py', f'{book_title}', f'{starting_chapter_number}',
+            print("All requests for this config have been processed, running sort_chapters.py")
+            sys.argv = ['./scripts/sort_chapters.py', f'{book_title}', f'{starting_chapter_number}',
                         f'{next_chapter_number}']
-            exec(open('./scripts/sortchapters.py').read())
+            exec(open('./scripts/sort_chapters.py').read())

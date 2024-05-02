@@ -18,5 +18,5 @@ with open(text_file_path, 'r', encoding='utf-8') as file:
 # Run TTS
 tts.tts_to_file(text, file_path=f'{split_text_file_path}.wav', speaker_wav="nick.wav", language="en")
 
-sys.argv = ['./scripts/wavtovideo.py', f'{split_text_file_path}', f'{book_title}']
-exec(open('./scripts/wavtovideo.py').read())
+sys.argv = ['./scripts/wav_to_video.py', f'{split_text_file_path}', f'{book_title}']
+exec(open('./scripts/wav_to_video.py').read())

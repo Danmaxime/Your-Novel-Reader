@@ -28,5 +28,5 @@ with open(f'{book_title} - Chapters {starting_chapter}-{ending_chapter}.txt', 'w
         # Write the modified line back to the file
         file.write(new_line)
 
-sys.argv = ['./scripts/ttscreator.py', f'{book_title} - Chapters {starting_chapter}-{ending_chapter}.txt', f'{book_title}']
-exec(open('./scripts/ttscreator.py').read())
+sys.argv = ['./scripts/tts_creator.py', f'{book_title} - Chapters {starting_chapter}-{ending_chapter}.txt', f'{book_title}']
+exec(open('./scripts/tts_creator.py').read())

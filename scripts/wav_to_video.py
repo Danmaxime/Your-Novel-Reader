@@ -7,17 +7,17 @@ file_name = sys.argv[1]
 book_title = sys.argv[2]
 
 
-def getjson(path):
+def get_json(path):
     open_json = open(path)
     config_data = json.load(open_json)
     open_json.close()
     return config_data
 
 
-novel_list_json = getjson('C:\\Users\\danie\\Desktop\\pyindex\\novel_list.json')
+novel_list_json = get_json('C:\\Users\\danie\\Desktop\\pyindex\\novel_list.json')
 novel_config_path = novel_list_json[book_title.lower()]
 
-novel_config = getjson(novel_config_path)
+novel_config = get_json(novel_config_path)
 
 # Get the current script directory
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -39,5 +39,5 @@ video = image.set_audio(audio)
 # Tested and FPS does not affect the quality of the audio
 video.write_videofile(f'{file_name}.mp4', fps=1, audio_bitrate="384k")
 
-sys.argv = ['./scripts/movefiles.py', f'{file_name}', f'{book_title}']
-exec(open('./scripts/movefiles.py').read())
+sys.argv = ['./scripts/move_files.py', f'{file_name}', f'{book_title}']
+exec(open('./scripts/move_files.py').read())
