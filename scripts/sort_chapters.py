@@ -28,11 +28,12 @@ for file in glob.glob("*.txt"):
 
 
 for chapter in chapter_list.copy():
-    if chapter[0:7] != "Chapter":
+    if f'{book_title} - Chapter' not in chapter:
         chapter_list.remove(chapter)
 
 # Extract the chapter number and sort based on it
 chapter_list.sort(key=lambda fname: int(re.search(r'\d+', fname).group()))
+
 
 with open(f'{book_title} - Chapters {starting_chapter}-{ending_chapter}.txt', 'a', encoding='utf-8', errors='ignore') as outfile:
     for fname in chapter_list:

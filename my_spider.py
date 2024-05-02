@@ -55,7 +55,7 @@ class MySpider(scrapy.Spider):
         paragraphs = response.css('div#chapter-container p::text').getall()
         title_parts = chapter_title.split(":")
 
-        with open(f'{title_parts[0]}.txt', 'w', encoding='utf-8') as f:
+        with open(f'{book_title} - {title_parts[0]}.txt', 'w', encoding='utf-8') as f:
             f.write(chapter_title + '\n\n')
             for paragraph in paragraphs:
                 f.write(paragraph + '\n\n')
