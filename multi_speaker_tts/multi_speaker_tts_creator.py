@@ -9,6 +9,7 @@ from pydub import AudioSegment
 
 # Path to your text file
 text_file_path = sys.argv[1]
+book_title = sys.argv[2]
 split_text_file_path = os.path.splitext(text_file_path)[0]
 
 
@@ -29,14 +30,20 @@ with open(text_file_path, 'r', encoding='utf-8') as file:
 segments = []
 temp_segment = ''
 # Split the text into segments based on [ ] brackets
-for item in text_line_list:
-    if not needs_conversion_to_system(item):
-        temp_segment += item
-    else:
-        if temp_segment != '':
-            segments.append(temp_segment)
+for i, item in enumerate(text_line_list):
+    if (item == '' or item == '\n') and i != len(text_line_list) - 1:
+        continue
+    if needs_conversion_to_system(item):
+        print("Is system")
+        segments.append(temp_segment)
         segments.append(item)
         temp_segment = ''
+        continue
+    else:
+        temp_segment += item
+
+    if i == len(text_line_list) - 1:
+        segments.append(temp_segment)
 
 # Process each segment
 for i, segment in enumerate(segments):
@@ -51,6 +58,7 @@ for i, segment in enumerate(segments):
         tts.tts_to_file(segment, file_path=f'{split_text_file_path}_{i}.wav', speaker_wav=speaker_wav, language="en")
 
 # Get a list of all the wav files
+print("Finding wav segments")
 wav_files = glob.glob(f'{split_text_file_path}_*.wav')
 
 # Create an empty AudioSegment object
@@ -58,15 +66,19 @@ combined = AudioSegment.empty()
 
 # Loop over each file
 for wav_file in wav_files:
+    print(f"Adding {wav_file} segment")
     sound = AudioSegment.from_wav(wav_file)
     combined += sound
 
 # Export to a wav file
+print("Merging wav segments")
 combined.export(f"{split_text_file_path}.wav", format="wav")
 
 for file in wav_files:
+    print(f"Removing {file}")
     os.remove(file)
+
 # Run the video script
-sys.argv = ['./scripts/wav_to_video.py', f'{split_text_file_path}.wav']
+sys.argv = ['./scripts/wav_to_video.py', f'{split_text_file_path}', f'{book_title}']
 exec(open('./scripts/wav_to_video.py').read())
 

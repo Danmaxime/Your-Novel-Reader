@@ -11,7 +11,7 @@ def get_config():
     open_novel_list = open('novel_list.json')
     novel_list_json = json.load(open_novel_list)
     open_novel_list.close()
-    path = novel_list_json[book_title.lower()]
+    path = novel_list_json[sys.argv[1].lower()]
     with open(f'{path}', 'r', encoding='utf-8') as config:
         config_obj = json.load(config)
     return config_obj
@@ -22,7 +22,7 @@ def add_newline_after_400_chars(input_string, is_system_string):
     if len(input_string) <= 400:
         return input_string
 
-    last_space_index = input_string.rfind(' ', 0, 400)
+    last_space_index = input_string.rfind('.', 0, 400)
     if not is_system_string:
         return input_string[:last_space_index] + '\n\n' + input_string[last_space_index+1:]
     else:

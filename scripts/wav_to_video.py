@@ -14,6 +14,7 @@ def get_json(path):
     return config_data
 
 
+print("Start WAV to video conversion")
 novel_list_json = get_json('C:\\Users\\danie\\Desktop\\pyindex\\novel_list.json')
 novel_config_path = novel_list_json[book_title.lower()]
 
